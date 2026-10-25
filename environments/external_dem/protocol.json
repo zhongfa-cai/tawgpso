@@ -1,0 +1,304 @@
+{
+  "protocol_name": "external_dem_generalization",
+  "protocol_version": "V5-2026-07-23",
+  "status": "frozen_for_fair_scene_specific_external_dem_comparison",
+  "scope": {
+    "preserve_existing_s1_s6": true,
+    "do_not_modify_main_comparison": true,
+    "do_not_retune_tawg_pso": true,
+    "do_not_update_historical_outputs": true
+  },
+  "scenes": [
+    "ci_ext",
+    "msh_ext"
+  ],
+  "common_grid": {
+    "width_cols": 923,
+    "height_rows": 1001,
+    "resolution_m": 5.0,
+    "x_center_min_m": 0.0,
+    "x_center_max_m": 4610.0,
+    "y_center_min_m": 0.0,
+    "y_center_max_m": 5000.0,
+    "xy_axis_policy": "local x is source/output column coordinate in metres; local y is source/output row coordinate in metres; no y-axis flip is applied for paired CI/MSH evaluation",
+    "logical_evaluation_bounds_m": {
+      "x_min": 0.0,
+      "x_max": 4610.0,
+      "y_min": 0.0,
+      "y_max": 5000.0
+    },
+    "main_evaluation_grid_policy": "CI-EXT and MSH-EXT are separate real-terrain map environments. Each scene is optimized and evaluated only on its own frozen DEM inside the logical mission bounds [0,4610]x[0,5000] m. CI-EXT uses its frozen Christmas-Island-derived 923x1001, 5 m DEM reconstructed from the NMOPSO source-map context. MSH-EXT uses the frozen native 1 m Mount St. Helens LiDAR DEM as the main terrain, with a small native-resolution support margin stored only to make boundary interpolation/audit deterministic. Raw fitness values are reported per scene and are never averaged across scenes."
+  },
+  "mission": {
+    "start_xy_m": [
+      245.0,
+      245.0
+    ],
+    "goal_xy_m": [
+      3995.0,
+      3995.0
+    ],
+    "start_agl_m": 80.0,
+    "goal_agl_m": 100.0,
+    "agl_min_m": 5.0,
+    "agl_max_m": 120.0,
+    "safety_margin_m": 5.0,
+    "forbid_overfly": true,
+    "overfly_policy": "threats are vertical no-fly cylinders; overflight is forbidden regardless of path altitude",
+    "threats": [
+      {
+        "id": "T1",
+        "center_xy_m": [
+          995.0,
+          1145.0
+        ],
+        "radius_m": 350.0
+      },
+      {
+        "id": "T2",
+        "center_xy_m": [
+          2995.0,
+          1245.0
+        ],
+        "radius_m": 350.0
+      },
+      {
+        "id": "T3",
+        "center_xy_m": [
+          2245.0,
+          2745.0
+        ],
+        "radius_m": 350.0
+      },
+      {
+        "id": "T4",
+        "center_xy_m": [
+          3495.0,
+          2995.0
+        ],
+        "radius_m": 250.0
+      },
+      {
+        "id": "T5",
+        "center_xy_m": [
+          995.0,
+          2495.0
+        ],
+        "radius_m": 300.0
+      },
+      {
+        "id": "T6",
+        "center_xy_m": [
+          2495.0,
+          3995.0
+        ],
+        "radius_m": 300.0
+      }
+    ]
+  },
+  "optimizer": {
+    "search_coordinate_system": "normalized",
+    "ux_bounds": [
+      0.0,
+      200.0
+    ],
+    "uy_bounds": [
+      0.0,
+      200.0
+    ],
+    "uz_bounds": [
+      0.0,
+      200.0
+    ],
+    "gate_bounds": [
+      -4.0,
+      4.0
+    ],
+    "physical_decode": {
+      "x_m": "ux / 200 * 4610",
+      "y_m": "uy / 200 * 5000",
+      "agl_m": "agl_min_m + uz / 200 * (agl_max_m - agl_min_m)",
+      "z_m": "DEM_scene(x_m, y_m) + agl_m",
+      "hmin_formula": "valid_dem_min_m + agl_min_m",
+      "hmax_formula": "valid_dem_max_m + agl_max_m",
+      "height_encoding": "uz is normalized AGL relative to each scene's own DEM, not global absolute altitude"
+    },
+    "st_v_policy": "reuse project ST_V unchanged; do not scale velocities to physical metres",
+    "evaluation_policy": "fitness, AGL, collision, path length, and energy are computed after physical decoding on the scene-specific terrain; all algorithms in a scene share the same map, constraints, evaluator, and 20100-evaluation budget",
+    "search_constraint_audit_spacing_m": 1.0,
+    "final_path_sampling_audit_spacing_m": {
+      "ci_ext": 1.0,
+      "msh_ext": 1.0
+    },
+    "robust_path_sampling_audit_spacing_m": {
+      "msh_ext": 0.5
+    },
+    "post_decode_path_repair_policy": "disabled_for_all_algorithms; the external experiment may clip optimizer variables through existing bounds, but it must not project, densify, or otherwise repair decoded paths for only some algorithms before final evaluation",
+    "boundary_interpolation_policy": "points outside the logical mission bounds [0,4610]x[0,5000] m are invalid for every scene. Exact outer pixel centres are evaluated with the adjacent/native support block when available; any NoData neighbour in that support block remains invalid. MSH support-margin cells beyond the logical bounds are never valid path/evaluation locations."
+  },
+  "ci_ext": {
+    "scene_id": "CI-EXT",
+    "source_path": "environments/external_dem/assets/ci_ext.tif",
+    "source_description": "Frozen ChrismasTerrain2.tif 5 m GeoTIFF for the Christmas-Island-derived CI-EXT terrain, reconstructed from the NMOPSO source-code map context and retained in its native metric grid for this external experiment.",
+    "source_policy": "use the frozen repository GeoTIFF as the CI-EXT map; preserve native 5 m metric terrain, NoData mask, CRS, and extent; do not resize to 200x200 m or normalize elevations",
+    "source_width_cols": 923,
+    "source_height_rows": 1001,
+    "source_resolution_m": 5.0,
+    "coordinate_policy": "NMOPSO one-based source indices are converted with x_local=(column-1)*5 and y_local=(row-1)*5; protocol coordinates are already in metres",
+    "nodata_policy": "NoData is invalid only; never replace NoData by zero, terrain minimum, or interpolation",
+    "bilinear_policy": "if any of the four bilinear neighbours is NoData, terrain height is invalid; exact outer pixel centres use the adjacent interior support block",
+    "path_policy": "any path sample falling outside the valid DEM mask is infeasible"
+  },
+  "msh_ext": {
+    "scene_id": "MSH-EXT",
+    "source_description": "2017 Mount St. Helens 1 m bare-earth LiDAR DEM, referenced by the external DEM protocol as USGS DOI 10.5066/P9H16RC7 and frozen locally from the official NOAA Digital Coast / USFS_GiffordPinchot_2017_9807 GeoTIFF tile distribution.",
+    "source_doi": "10.5066/P9H16RC7",
+    "source_license": "CC0 as recorded in the external DEM protocol source description",
+    "source_distribution": "NOAA Digital Coast public S3 GeoTIFF tiles under USFS_GiffordPinchot_2017_9807",
+    "source_policy": "resolve 16 required tiles from official urllist9807.txt or an official tile directory; do not guess date suffixes; preserve the native 1 m metric terrain for MSH-EXT evaluation",
+    "source_dir": "environments/external_dem/assets",
+    "manifest_path": "environments/external_dem/assets/msh_source_manifest.json",
+    "one_m_window_path": "environments/external_dem/assets/msh_ext_1m_window.tif",
+    "five_m_grid_path": "environments/external_dem/assets/msh_ext_5m_grid.tif",
+    "crs_epsg": 9674,
+    "vertical_datum": "NAVD88, as distributed in the NOAA/USFS source tiles",
+    "anchor_wgs84_lon_lat": [
+      -122.1944,
+      46.1912
+    ],
+    "anchor_epsg9674_m": [
+      430772.0,
+      1349720.0
+    ],
+    "anchor_row_col_5m": [
+      500,
+      461
+    ],
+    "geotransform_5m": [
+      428464.5,
+      5.0,
+      0.0,
+      1352222.5,
+      0.0,
+      -5.0
+    ],
+    "geotransform_1m": [
+      428464.5,
+      1.0,
+      0.0,
+      1352222.5,
+      0.0,
+      -1.0
+    ],
+    "one_m_window": {
+      "width_cols": 4615,
+      "height_rows": 5005,
+      "resolution_m": 1.0,
+      "role": "native 1 m support window for MSH-EXT; main evaluation is clipped to logical_window and never permits samples in the extra support margin"
+    },
+    "logical_window": {
+      "width_cols": 4611,
+      "height_rows": 5001,
+      "resolution_m": 1.0,
+      "x_center_min_m": 0.0,
+      "x_center_max_m": 4610.0,
+      "y_center_min_m": 0.0,
+      "y_center_max_m": 5000.0,
+      "role": "actual MSH-EXT optimization, fitness, metrics, and final path-audit terrain domain"
+    },
+    "support_margin_policy": "The saved 4615x5005 1 m GeoTIFF keeps a 4 m native-resolution support margin relative to the 4611x5001 logical mission window. The support margin exists only for deterministic interpolation and the retained 5 m diagnostic grid; it is not part of the valid mission area.",
+    "logical_bounds_enforced": true,
+    "five_m_grid": {
+      "width_cols": 923,
+      "height_rows": 1001,
+      "resolution_m": 5.0,
+      "resampling": "strict 5x5 average from the aligned 1m window",
+      "role": "derived diagnostic/compatibility product only; not used for MSH-EXT main ranking",
+      "no_auto_tap_extension": true
+    },
+    "nodata_required_count": 0,
+    "tile_keys": [
+      {
+        "easting": 427500,
+        "northing": 1347000
+      },
+      {
+        "easting": 427500,
+        "northing": 1348500
+      },
+      {
+        "easting": 427500,
+        "northing": 1350000
+      },
+      {
+        "easting": 427500,
+        "northing": 1351500
+      },
+      {
+        "easting": 429000,
+        "northing": 1347000
+      },
+      {
+        "easting": 429000,
+        "northing": 1348500
+      },
+      {
+        "easting": 429000,
+        "northing": 1350000
+      },
+      {
+        "easting": 429000,
+        "northing": 1351500
+      },
+      {
+        "easting": 430500,
+        "northing": 1347000
+      },
+      {
+        "easting": 430500,
+        "northing": 1348500
+      },
+      {
+        "easting": 430500,
+        "northing": 1350000
+      },
+      {
+        "easting": 430500,
+        "northing": 1351500
+      },
+      {
+        "easting": 432000,
+        "northing": 1347000
+      },
+      {
+        "easting": 432000,
+        "northing": 1348500
+      },
+      {
+        "easting": 432000,
+        "northing": 1350000
+      },
+      {
+        "easting": 432000,
+        "northing": 1351500
+      }
+    ]
+  },
+  "run_protocol": {
+    "algorithms": [
+      "TAWG-PSO",
+      "PSO",
+      "NMOPSO",
+      "SPSO",
+      "ECL-PSO",
+      "EMMOP"
+    ],
+    "n_runs": 51,
+    "seed_start": 2026001,
+    "seed_end": 2026051,
+    "population": 50,
+    "iterations": 400,
+    "max_fes": 20100,
+    "pilot_policy": "run one-seed smoke tests only after protocol validation, unit tests, and deterministic scene audit pass"
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "source_description": "2017 Mount St. Helens 1 m bare-earth LiDAR DEM; protocol citation USGS DOI 10.5066/P9H16RC7; frozen local tiles are from the official NOAA Digital Coast / USFS_GiffordPinchot_2017_9807 GeoTIFF distribution",
+  "source_policy": "resolve 16 required tiles from official urllist9807.txt or an official tile directory; do not guess date suffixes; preserve native 1 m metric terrain",
+  "tiles": [
+    {
+      "easting": 427500,
+      "local_path": "environment/external_dem/assets/msh_ext/source/DTM_GIPGPN_427500_1347000_20170915.tif",
+      "northing": 1347000,
+      "sha256": "feb1de99a9ff2602bee902f88783019a81f3f6020e37af95f1d3883a3e0fc6c3",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/USFS_GiffordPinchot_2017_9807/DTM_GIPGPN_427500_1347000_20170915.tif"
+    },
+    {
+      "easting": 427500,
+      "local_path": "environment/external_dem/assets/msh_ext/source/DTM_GIPGPN_427500_1348500_20170915.tif",
+      "northing": 1348500,
+      "sha256": "1e6d954059e4542f9d60e188d82f8800b4c93dbc0f0d570dc36fed093cf76c80",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/USFS_GiffordPinchot_2017_9807/DTM_GIPGPN_427500_1348500_20170915.tif"
+    },
+    {
+      "easting": 427500,
+      "local_path": "environment/external_dem/assets/msh_ext/source/DTM_GIPGPN_427500_1350000_20170927.tif",
+      "northing": 1350000,
+      "sha256": "bece1306bf669eaa29515ddf8334f53731ed7a62b0a832ecf9b37eb2358743d2",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/USFS_GiffordPinchot_2017_9807/DTM_GIPGPN_427500_1350000_20170927.tif"
+    },
+    {
+      "easting": 427500,
+      "local_path": "environment/external_dem/assets/msh_ext/source/DTM_GIPGPN_427500_1351500_20170927.tif",
+      "northing": 1351500,
+      "sha256": "d3051456b495b5b1499d430ae1ab6b87ca446ffa912d728594597bf0868b5669",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/USFS_GiffordPinchot_2017_9807/DTM_GIPGPN_427500_1351500_20170927.tif"
+    },
+    {
+      "easting": 429000,
+      "local_path": "environment/external_dem/assets/msh_ext/source/DTM_GIPGPN_429000_1347000_20170915.tif",
+      "northing": 1347000,
+      "sha256": "a531d3ec8153dc98f0caaa4442d6587e3e346bcc9e13b57cc282d27c0daf2d74",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/USFS_GiffordPinchot_2017_9807/DTM_GIPGPN_429000_1347000_20170915.tif"
+    },
+    {
+      "easting": 429000,
+      "local_path": "environment/external_dem/assets/msh_ext/source/DTM_GIPGPN_429000_1348500_20170926.tif",
+      "northing": 1348500,
+      "sha256": "338b3af6b785decb7ae295f7438949c4cf4d79f34630878d44b759a6b055101e",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/USFS_GiffordPinchot_2017_9807/DTM_GIPGPN_429000_1348500_20170926.tif"
+    },
+    {
+      "easting": 429000,
+      "local_path": "environment/external_dem/assets/msh_ext/source/DTM_GIPGPN_429000_1350000_20170927.tif",
+      "northing": 1350000,
+      "sha256": "1a47787e49cc7c18279d1fbee28b27467bf79aaab1c83e1b2f3c53824753565e",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/USFS_GiffordPinchot_2017_9807/DTM_GIPGPN_429000_1350000_20170927.tif"
+    },
+    {
+      "easting": 429000,
+      "local_path": "environment/external_dem/assets/msh_ext/source/DTM_GIPGPN_429000_1351500_20170927.tif",
+      "northing": 1351500,
+      "sha256": "699829ab91bcaff6e73d32d993ef16db94320e193874d020e08686fef7bbb947",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/USFS_GiffordPinchot_2017_9807/DTM_GIPGPN_429000_1351500_20170927.tif"
+    },
+    {
+      "easting": 430500,
+      "local_path": "environment/external_dem/assets/msh_ext/source/DTM_GIPGPN_430500_1347000_20170915.tif",
+      "northing": 1347000,
+      "sha256": "aa548d26defc4fff7a6c750727df723a79f8c4333b7f81fb9d4aa25ddc1f995c",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/USFS_GiffordPinchot_2017_9807/DTM_GIPGPN_430500_1347000_20170915.tif"
+    },
+    {
+      "easting": 430500,
+      "local_path": "environment/external_dem/assets/msh_ext/source/DTM_GIPGPN_430500_1348500_20170926.tif",
+      "northing": 1348500,
+      "sha256": "827144f83af572134c4ef74201c911edf5edb37a4d5a5685861284e14553f49c",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/USFS_GiffordPinchot_2017_9807/DTM_GIPGPN_430500_1348500_20170926.tif"
+    },
+    {
+      "easting": 430500,
+      "local_path": "environment/external_dem/assets/msh_ext/source/DTM_GIPGPN_430500_1350000_20170926.tif",
+      "northing": 1350000,
+      "sha256": "179758537b10a6e21b9251bb50c2f019025312ff79a57905d600ee8c99cc883e",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/USFS_GiffordPinchot_2017_9807/DTM_GIPGPN_430500_1350000_20170926.tif"
+    },
+    {
+      "easting": 430500,
+      "local_path": "environment/external_dem/assets/msh_ext/source/DTM_GIPGPN_430500_1351500_20170927.tif",
+      "northing": 1351500,
+      "sha256": "f11fa86bec9268a645a69c1957816ccf396849f117f7364823196397de707f9c",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/USFS_GiffordPinchot_2017_9807/DTM_GIPGPN_430500_1351500_20170927.tif"
+    },
+    {
+      "easting": 432000,
+      "local_path": "environment/external_dem/assets/msh_ext/source/DTM_GIPGPN_432000_1347000_20170915.tif",
+      "northing": 1347000,
+      "sha256": "0c308de7bdc0bfb666c25c1b41632c9c23fd006e23cfcf08ff1970cfc2efd62b",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/USFS_GiffordPinchot_2017_9807/DTM_GIPGPN_432000_1347000_20170915.tif"
+    },
+    {
+      "easting": 432000,
+      "local_path": "environment/external_dem/assets/msh_ext/source/DTM_GIPGPN_432000_1348500_20170926.tif",
+      "northing": 1348500,
+      "sha256": "a92ece1b8d765b4f9eb0413bcdbacde102e682cb09ec62b56792bebd33a793a2",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/USFS_GiffordPinchot_2017_9807/DTM_GIPGPN_432000_1348500_20170926.tif"
+    },
+    {
+      "easting": 432000,
+      "local_path": "environment/external_dem/assets/msh_ext/source/DTM_GIPGPN_432000_1350000_20170926.tif",
+      "northing": 1350000,
+      "sha256": "95a2e5edd3ccc42418b5e8d170c1ca5ab0813af8401c3ae0cd7719bdcac847ca",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/USFS_GiffordPinchot_2017_9807/DTM_GIPGPN_432000_1350000_20170926.tif"
+    },
+    {
+      "easting": 432000,
+      "local_path": "environment/external_dem/assets/msh_ext/source/DTM_GIPGPN_432000_1351500_20170926.tif",
+      "northing": 1351500,
+      "sha256": "013dc8a91ce4411cbcc4965d8c8a0a8eedbadb7ed6400863b3ef433b50f3e8f8",
+      "url": "https://noaa-nos-coastal-lidar-pds.s3.amazonaws.com/dem/USFS_GiffordPinchot_2017_9807/DTM_GIPGPN_432000_1351500_20170926.tif"
+    }
+  ]
+}
